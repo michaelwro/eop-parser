@@ -1,0 +1,60 @@
+{
+    "name": "math-utils",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "UBUNTU_VERSION": "${localEnv:UBUNTU_VERSION:22.04}"
+        },
+        "cacheFrom": "ghcr.io/michaelwro/math-utils-devcontainer:${localEnv:UBUNTU_VERSION:22.04}"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "actboy168.tasks",
+                "christian-kohler.path-intellisense",
+                "cschlosser.doxdocgen",
+                "davidanson.vscode-markdownlint",
+                "eamodio.gitlens",
+                "github.vscode-github-actions",
+                "gruntfuggly.todo-tree",
+                "jeff-hykin.better-cpp-syntax",
+                "matepek.vscode-catch2-test-adapter",
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cpptools",
+                "ue.alphabetical-sorter"
+            ],
+            "settings": {
+                "C_Cpp.codeAnalysis.exclude": {
+                    "${workspaceFolder}/test/": true
+                },
+                "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+                "C_Cpp.codeAnalysis.runAutomatically": true,
+                "doxdocgen.c.getterText": "Get {name}",
+                "doxdocgen.c.setterText": "Set {name}",
+                "doxdocgen.cpp.ctorText": "Create a {name}",
+                "doxdocgen.cpp.dtorText": "Destroy the {name}",
+                "doxdocgen.file.fileOrder": [
+                    "file", "author", "date"
+                ],
+                "doxdocgen.generic.useGitUserName": false,
+                "doxdocgen.generic.authorTag": "@author {author}",
+                "doxdocgen.generic.returnTemplate": "@return ",
+                "doxdocgen.generic.dateFormat": "YYYY-MM-DD",
+                "editor.insertSpaces": true,
+                "editor.rulers": [
+                    100
+                ],
+                "[c]": {
+                    "editor.tabSize": 4
+                },
+                "[cpp]": {
+                    "editor.tabSize": 4
+                },
+                "[cmake]": {
+                    "editor.tabSize": 4
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,4 @@
+black
+isort
+pre-commit
+pre-commit-update
