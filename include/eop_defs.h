@@ -2,6 +2,7 @@
  * @file eop_defs.h
  * @author Michael Wrona
  * @date 2023-04-23
+ * @copyright Copyright (c) 2023 Michael Wrona
  */
 
 #ifndef EOPPARSER_EOP_DEFS_H_

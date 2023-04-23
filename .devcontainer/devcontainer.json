@@ -34,8 +34,11 @@
                 "doxdocgen.c.setterText": "Set {name}",
                 "doxdocgen.cpp.ctorText": "Create a {name}",
                 "doxdocgen.cpp.dtorText": "Destroy the {name}",
+                "doxdocgen.file.copyrightTag": [
+                    "@copyright Copyright (c) {year} Michael Wrona"
+                ],
                 "doxdocgen.file.fileOrder": [
-                    "file", "author", "date"
+                    "file", "author", "date", "copyright"
                 ],
                 "doxdocgen.generic.useGitUserName": false,
                 "doxdocgen.generic.authorTag": "@author {author}",
