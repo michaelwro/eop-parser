@@ -4,7 +4,11 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/"
+                "${workspaceFolder}/",
+                "${workspaceFolder}/include/",
+                "${workspaceFolder}/build/_deps/googletest-src/googlemock/include/",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/include/",
+                "${workspaceFolder}/test/"
             ],
             "cppStandard": "c++11",
             "intelliSenseMode": "linux-gcc-x64",

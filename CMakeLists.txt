@@ -30,6 +30,7 @@ set(INCL_DIR "include/")
 
 file(GLOB EOPPARSER_SOURCES
     ${SRC_DIR}/*.cpp
+    ${SRC_DIR}/utils/*.cpp
 )
 
 add_library(${EOPPARSER_LIB} SHARED
@@ -49,3 +50,7 @@ target_include_directories(${EOPPARSER_LIB} PUBLIC
 set_target_properties(${EOPPARSER_LIB} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${EOPPARSER_LIB_OUTPUT_DIR}
 )
+
+# ADD TESTS ========================================================================================
+enable_testing()
+add_subdirectory("./test/")
