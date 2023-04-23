@@ -4,7 +4,7 @@
 
 **Code By:** Michael Wrona | GitHub: [@michaelwro](https://github.com/michaelwro)
 
-C++11 library for parsing and interpolating [CelesTrak](https://celestrak.org/SpaceData/) earth orientation parameter (EOP) releases.
+C++ library for parsing and interpolating [CelesTrak](https://celestrak.org/SpaceData/) earth orientation parameter (EOP) releases.
 
 ## CelesTrak EOP File Example
 
@@ -38,12 +38,25 @@ This project can be found [here](https://github.com/michaelwro/eop-parser).
 git clone https://github.com/michaelwro/eop-parser.git
 ```
 
+## Brainstorming
+
 ```cpp
 
-EopParser parser("data.csv");  // entire file
-EopParser parser("data.csv", 0, 5900);  // MJD range
-EopParser parser("data.csv", "2021-01-01", "2022-01-01");  // date string range
+EopParser parser("data.csv");  
 
+/**
+ * parse file for date range, generate spline interpolation polynomials
+ */
+parser.read(5900);  // MDJ, input -> table end
+parser.read(0, 5900);  // MJD range
+parser.read("2022-01-01");  // date string, input -> table end
+parser.read("2021-01-01", "2022-01-01");  // date string range
 
+// auto [x, y, dut, lod, ... ] = parser.get_all(5801.745);  // C++17 structured binding
+
+// Iau2006Eop eop = parser.get_iau2006(5780.5);  // particular set via class
+// double x = eop.X();
+
+EopParser::fk5_t eop = parser.get_fk5(5612.6);  // particular set via struct
+double x = eop.X;
 ```
-

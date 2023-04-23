@@ -6,14 +6,12 @@
 
 #include <utils/ymd_to_mjd.h>
 
-#include <cmath>
 #include <stdexcept>
 
+namespace EopParser {
 namespace EopUtils {
 
-using int_type = unsigned int;
-
-int_type ymd_to_mjd(int_type year, int_type month, int_type day) {
+unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day) {
     if (month == 0 || month > 12) {
         throw std::domain_error("Invalid month number");
     }
@@ -32,12 +30,13 @@ int_type ymd_to_mjd(int_type year, int_type month, int_type day) {
         month += 12;
     }
 
-    const auto A = static_cast<int_type>(year / 100);
-    const int_type B = 2 - A + static_cast<int_type>(A / 4);
+    const auto A = static_cast<unsigned int>(year / 100);
+    const unsigned int B = 2 - A + static_cast<unsigned int>(A / 4);
 
-    return static_cast<int_type>(365.25 * (year + 4716))
-        + static_cast<int_type>(30.6001 * (month + 1))
-        + day + B - 2401525u;  // -1524.5 - 2'400'000.5
+    return static_cast<unsigned int>(365.25 * (year + 4716))
+        + static_cast<unsigned int>(30.6001 * (month + 1))
+        + day + B - 2401525u;  // -1524.5 - 2400000.5
 }
 
 }  // namespace EopUtils
+}  // namespace EopParser
