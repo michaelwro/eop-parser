@@ -18,15 +18,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Get submodules
-        uses: devcontainers/ci@v0.3
-        env:
-          UBUNTU_VERSION: ${{ inputs.ubuntu_version }}
         with:
-          cacheFrom: ghcr.io/${{ github.repository }}-devcontainer:${{ inputs.ubuntu_version }}
-          runCmd: |
-            git submodule update --init --recursive
+          submodules: true
 
       - name: Build
         uses: devcontainers/ci@v0.3
