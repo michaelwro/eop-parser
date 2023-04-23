@@ -19,16 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Check deps versions
+      - name: Get submodules
         uses: devcontainers/ci@v0.3
         env:
           UBUNTU_VERSION: ${{ inputs.ubuntu_version }}
         with:
           cacheFrom: ghcr.io/${{ github.repository }}-devcontainer:${{ inputs.ubuntu_version }}
           runCmd: |
-            cmake --version
-            ctest --version
-            g++ --version
+            git submodule update --init --recursive
 
       - name: Build
         uses: devcontainers/ci@v0.3
