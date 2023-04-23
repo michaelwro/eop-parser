@@ -1,5 +1,7 @@
 # EOP Parser
 
+[![Build & Test](https://github.com/michaelwro/eop-parser/actions/workflows/build-test-main.yml/badge.svg)](https://github.com/michaelwro/eop-parser/actions/workflows/build-test-main.yml) [![Pre-Commit](https://github.com/michaelwro/eop-parser/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/michaelwro/eop-parser/actions/workflows/pre-commit.yml)
+
 **Code By:** Michael Wrona | GitHub: [@michaelwro](https://github.com/michaelwro)
 
 C++11 library for parsing and interpolating [CelesTrak](https://celestrak.org/SpaceData/) earth orientation parameter (EOP) releases.
