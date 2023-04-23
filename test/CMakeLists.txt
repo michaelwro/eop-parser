@@ -37,6 +37,7 @@ target_include_directories(${TEST_EOPPARSER_EXEC} PUBLIC
 target_link_libraries(${TEST_EOPPARSER_EXEC} PUBLIC
     ${EOPPARSER_LIB}
     GTest::gtest_main
+    AriaCsvParser
 )
 
 

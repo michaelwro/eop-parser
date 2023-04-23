@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2023 Michael Wrona
  */
 
-#include <utils/ymd_to_mjd.h>
+#include "utils/ymd_to_mjd.h"
 
 #include <stdexcept>
 

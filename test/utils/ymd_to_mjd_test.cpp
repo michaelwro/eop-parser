@@ -5,7 +5,6 @@
  */
 
 #include <gtest/gtest.h>
-
 #include <utils/ymd_to_mjd.h>
 
 #include <stdexcept>
@@ -52,7 +51,6 @@ TEST(YmdToMjdTest, CatchesBadDateInputs)
         ymd_to_mjd(2021, 7, 33);  // bad day
     }, std::domain_error);
 }
-
 
 // =================================================================================================
 int main(int argc, char** argv)

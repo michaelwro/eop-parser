@@ -11,9 +11,9 @@
 namespace EopParser {
 
 /**
- * @brief IAU2006/2000 EOP set.
+ * @brief EOP set fron CelesTrak data.
  */
-struct iau2006_t {
+struct celestrak_data_t {
     double MJD;  ///< [days] Modified Julian date.
     double dUT1;  ///< [sec] UT1-UTC.
     double X;  ///< [arcsec] X (xp) pole coordinate (CIP -> IRP deflection).
@@ -21,17 +21,6 @@ struct iau2006_t {
     double LOD;  ///< [sec] Length of day offset (excess length of day).
     double dX;  ///< [arcsec] X (xp) pole correction (celestial pole offset).
     double dY;  ///< [arcsec] Y (yp) pole correction (celestial pole offset).
-};
-
-/**
- * @brief IAU76/FK5 EOP set.
- */
-struct fk5_t {
-    double MJD;  ///< [days] Modified Julian date.
-    double dUT1;  ///< [sec] UT1-UTC.
-    double X;  ///< [arcsec] X (xp) pole coordinate (CIP -> IRP deflection).
-    double Y;  ///< [arcsec] Y (yp) pole coordinate (CIP -> IRP deflection).
-    double LOD;  ///< [sec] Length of day offset (excess length of day).
     double dPsi;  ///< [arcsec] Nutation correction.
     double dEps;  ///< [arcsec] Obliquity of the ecliptic correction.
 };

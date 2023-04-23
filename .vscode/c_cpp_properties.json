@@ -8,7 +8,8 @@
                 "${workspaceFolder}/include/",
                 "${workspaceFolder}/build/_deps/googletest-src/googlemock/include/",
                 "${workspaceFolder}/build/_deps/googletest-src/googletest/include/",
-                "${workspaceFolder}/test/"
+                "${workspaceFolder}/test/",
+                "${workspaceFolder}/third-party/csv-parser/"
             ],
             "cppStandard": "c++11",
             "intelliSenseMode": "linux-gcc-x64",

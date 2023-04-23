@@ -1,0 +1,3 @@
+[submodule "third-party/csv-parser"]
+	path = third-party/csv-parser
+	url = https://github.com/AriaFallah/csv-parser.git

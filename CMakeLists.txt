@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(EopParser LANGUAGES CXX)
 
 include(CTest)
 
-# PROJECT CONFIGURATION =======================================================
+# PROJECT CONFIGURATION ============================================================================
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -22,11 +22,16 @@ set(EOPPARSER_COMPILE_OPTIONS_RELEASE "${EOPPARSER_COMPILE_OPTIONS};-O1")
 set(EOPPARSER_LIB "eopparser")
 set(EOPPARSER_LIB_OUTPUT_DIR ${PROJECT_BINARY_DIR}/lib/)
 
-# source and include folders
+# project folders
 set(SRC_DIR "src/")
 set(INCL_DIR "include/")
 
-# BUILD LIBRARY ===============================================================
+# ADD THIRD PARTY ==================================================================================
+
+set(THIRD_PARTY_DIR "third-party/")
+add_subdirectory(${THIRD_PARTY_DIR}/csv-parser)  # AriaCsvParser
+
+# BUILD LIBRARY ====================================================================================
 
 file(GLOB EOPPARSER_SOURCES
     ${SRC_DIR}/*.cpp
@@ -49,6 +54,10 @@ target_include_directories(${EOPPARSER_LIB} PUBLIC
 
 set_target_properties(${EOPPARSER_LIB} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${EOPPARSER_LIB_OUTPUT_DIR}
+)
+
+target_link_libraries(${EOPPARSER_LIB} PUBLIC
+    AriaCsvParser
 )
 
 # ADD TESTS ========================================================================================
