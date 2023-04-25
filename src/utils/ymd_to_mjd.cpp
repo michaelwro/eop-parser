@@ -22,11 +22,7 @@ unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day)
     }
 
     // correct date components depending on month number
-    if (month == 1) {
-        year -= 1;
-        month += 12;
-    }
-    else if (month == 2) {
+    if (month == 1 || month == 2) {
         year -= 1;
         month += 12;
     }
@@ -36,7 +32,7 @@ unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day)
 
     return static_cast<unsigned int>(365.25 * (year + 4716))
         + static_cast<unsigned int>(30.6001 * (month + 1))
-        + day + B - 2401525u;  // -1524.5 - 2400000.5
+        + day + B - 2401525U;  // -1524.5 - 2400000.5
 }
 
 }  // namespace EopUtils

@@ -6,16 +6,17 @@
             "includePath": [
                 "${workspaceFolder}/",
                 "${workspaceFolder}/include/",
-                "${workspaceFolder}/build/_deps/googletest-src/googlemock/include/",
-                "${workspaceFolder}/build/_deps/googletest-src/googletest/include/",
-                "${workspaceFolder}/test/",
-                "${workspaceFolder}/third-party/csv-parser/"
+                "${workspaceFolder}/build/_deps/**",
+                "${workspaceFolder}/test/"
             ],
             "cppStandard": "c++11",
             "intelliSenseMode": "linux-gcc-x64",
             "configurationProvider": "${default}",
-            "defines": [],
-            "compilerPath": "/usr/bin/g++"
+            "defines": [
+                "TEST_FILE_DIR=\"/workspaces/eop-parser/test/data/\""
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
         }
     ]
 }

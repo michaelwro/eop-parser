@@ -1,7 +1,26 @@
-cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
-project(EopParser LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+project(EopParser LANGUAGES CXX
+    DESCRIPTION "EOP parser"
+)
 
-include(CTest)
+# ADD MODULES AND THIRD PARTY ======================================================================
+
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include(CTest)
+endif()
+
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
+
+include(FetchContent)
+
+FetchContent_Declare(
+    AriaCsvParser
+    GIT_REPOSITORY https://github.com/AriaFallah/csv-parser.git
+    GIT_TAG 4965c9f320d157c15bc1f5a6243de116a4caf101
+)
+
+FetchContent_MakeAvailable(AriaCsvParser)
 
 # PROJECT CONFIGURATION ============================================================================
 set(CMAKE_CXX_STANDARD 11)
@@ -20,46 +39,60 @@ set(EOPPARSER_COMPILE_OPTIONS_RELEASE "${EOPPARSER_COMPILE_OPTIONS};-O1")
 
 # library name
 set(EOPPARSER_LIB "eopparser")
-set(EOPPARSER_LIB_OUTPUT_DIR ${PROJECT_BINARY_DIR}/lib/)
+
+# outputs
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+
+# options
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 # project folders
-set(SRC_DIR "src/")
-set(INCL_DIR "include/")
-
-# ADD THIRD PARTY ==================================================================================
-
-set(THIRD_PARTY_DIR "third-party/")
-add_subdirectory(${THIRD_PARTY_DIR}/csv-parser)  # AriaCsvParser
+set(SRC_DIR ./src/)
+set(INCL_DIR ./include/)
 
 # BUILD LIBRARY ====================================================================================
+# decide which lib type to build
+if(BUILD_SHARED_LIBS)
+    add_library(${EOPPARSER_LIB} SHARED)
+else()
+    add_library(${EOPPARSER_LIB} STATIC)
+endif()
 
+# get lib sources
 file(GLOB EOPPARSER_SOURCES
     ${SRC_DIR}/*.cpp
     ${SRC_DIR}/utils/*.cpp
 )
 
-add_library(${EOPPARSER_LIB} SHARED
+target_sources(${EOPPARSER_LIB} PRIVATE
     ${EOPPARSER_SOURCES}
 )
 
-target_compile_definitions(${EOPPARSER_LIB} PUBLIC "$<$<CONFIG:DEBUG>:${EOPPARSER_COMPILE_DEFINITIONS_DEBUG}>")
-target_compile_definitions(${EOPPARSER_LIB} PUBLIC "$<$<CONFIG:RELEASE>:${EOPPARSER_COMPILE_DEFINITIONS_RELEASE}>")
 
-target_compile_options(${EOPPARSER_LIB} PRIVATE "$<$<CONFIG:DEBUG>:${EOPPARSER_COMPILE_OPTIONS_DEBUG}>")
-target_compile_options(${EOPPARSER_LIB} PRIVATE "$<$<CONFIG:RELEASE>:${EOPPARSER_COMPILE_OPTIONS_RELEASE}>")
+# define compile stuff
+target_compile_definitions(${EOPPARSER_LIB} PUBLIC $<$<CONFIG:DEBUG>:${EOPPARSER_COMPILE_DEFINITIONS_DEBUG}>)
+target_compile_definitions(${EOPPARSER_LIB} PUBLIC $<$<CONFIG:RELEASE>:${EOPPARSER_COMPILE_DEFINITIONS_RELEASE}>)
 
-target_include_directories(${EOPPARSER_LIB} PUBLIC
+target_compile_options(${EOPPARSER_LIB} PRIVATE $<$<CONFIG:DEBUG>:${EOPPARSER_COMPILE_OPTIONS_DEBUG}>)
+target_compile_options(${EOPPARSER_LIB} PRIVATE $<$<CONFIG:RELEASE>:${EOPPARSER_COMPILE_OPTIONS_RELEASE}>)
+
+target_include_directories(${EOPPARSER_LIB} PRIVATE
     ${INCL_DIR}
 )
 
-set_target_properties(${EOPPARSER_LIB} PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY ${EOPPARSER_LIB_OUTPUT_DIR}
-)
-
-target_link_libraries(${EOPPARSER_LIB} PUBLIC
+target_link_libraries(${EOPPARSER_LIB} PRIVATE
     AriaCsvParser
 )
 
+# INSTALL CONFIGURATION ============================================================================
+
 # ADD TESTS ========================================================================================
-enable_testing()
-add_subdirectory("./test/")
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
+    add_subdirectory("./test/")
+endif()
+
+# RESOURCES
+#   https://decovar.dev/blog/2021/03/08/cmake-cpp-library/
+#   https://cmake.org/cmake/help/latest/guide/tutorial/Selecting%20Static%20or%20Shared%20Libraries.html

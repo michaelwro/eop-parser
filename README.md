@@ -33,7 +33,7 @@ DATE,MJD,X,Y,UT1-UTC,LOD,DPSI,DEPS,DX,DY,DAT,DATA_TYPE
 ## Examples (WIP)
 
 ```cpp
-EopParser::EopParser parser("data.csv");
+EopParser::CelesTrakParser parser("data.csv");
 
 /**
  * parse file for date range, generate spline interpolation polynomials
@@ -43,7 +43,7 @@ parser.read(0, 5900);  // MJD range
 parser.read("2022-01-01");  // date string, input -> table end
 parser.read("2021-01-01", "2022-01-01");  // date string range
 
-EopParser::iau2006_t eop = parser.get_iau2006(5612.6);  // particular set via struct
+EopParser::celestrak_data_t eop = parser.get_iau2006(5612.6);  // particular set via struct
 double x = eop.X;
 ```
 
@@ -58,3 +58,7 @@ This project can be found [here](https://github.com/michaelwro/eop-parser).
 ```shell
 git clone https://github.com/michaelwro/eop-parser.git
 ```
+
+## Non Affiliation
+
+I am not affiliated with CelesTrak in any way. I'm just a nerd making a tool for other nerds to use :)

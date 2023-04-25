@@ -1,4 +1,5 @@
 # GET GTEST ========================================================================================
+include(CTest)
 include(FetchContent)
 
 FetchContent_Declare(
@@ -40,6 +41,10 @@ target_link_libraries(${TEST_EOPPARSER_EXEC} PUBLIC
     AriaCsvParser
 )
 
+# define directory where test data files are located
+target_compile_definitions(${TEST_EOPPARSER_EXEC} PRIVATE
+    "TEST_FILE_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/data/\""
+)
 
 # ADD TESTS ========================================================================================
 add_test(NAME ${TEST_EOPPARSER_EXEC}
