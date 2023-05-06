@@ -13,7 +13,8 @@ namespace EopParser {
 /**
  * @brief EOP set fron CelesTrak data.
  */
-struct celestrak_data_t {
+struct celestrak_data_t
+{
     double MJD;  ///< [days] Modified Julian date.
     double dUT1;  ///< [sec] UT1-UTC.
     double X;  ///< [arcsec] X (xp) pole coordinate (CIP -> IRP deflection).

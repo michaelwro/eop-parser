@@ -13,16 +13,19 @@ namespace EopParser {
 namespace EopUtils {
 
 unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day) {
-    if (month == 0 || month > 12) {
+    if (month == 0 || month > 12)
+    {
         throw std::domain_error("Invalid month number");
     }
 
-    if (day == 0 || day > 31) {
+    if (day == 0 || day > 31)
+    {
         throw std::domain_error("Invalid day number");
     }
 
     // correct date components depending on month number
-    if (month == 1 || month == 2) {
+    if (month == 1 || month == 2)
+    {
         year -= 1;
         month += 12;
     }

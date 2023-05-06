@@ -43,7 +43,7 @@ parser.read(0, 5900);  // MJD range
 parser.read("2022-01-01");  // date string, input -> table end
 parser.read("2021-01-01", "2022-01-01");  // date string range
 
-EopParser::celestrak_data_t eop = parser.get_iau2006(5612.6);  // particular set via struct
+EopParser::celestrak_data_t eop = parser.get(5612.6);  // via struct
 double x = eop.X;
 ```
 
