@@ -42,8 +42,7 @@ TEST_F(CsvParsingTest, Test1) {
 }
 
 // =================================================================================================
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
     ::testing::GTEST_FLAG(death_test_style) = "threadsafe";
 
     ::testing::InitGoogleTest(&argc, argv);

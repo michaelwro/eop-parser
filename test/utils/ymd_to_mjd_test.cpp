@@ -19,28 +19,23 @@ namespace {
  */
 
 // =================================================================================================
-TEST(YmdToMjdTest, Test1)
-{
+TEST(YmdToMjdTest, Test1) {
     EXPECT_EQ(ymd_to_mjd(2023, 4, 23), 60057);
 }
 
-TEST(YmdToMjdTest, Test2)
-{
+TEST(YmdToMjdTest, Test2) {
     EXPECT_EQ(ymd_to_mjd(2020, 1, 4), 58852);
 }
 
-TEST(YmdToMjdTest, Test3)
-{
+TEST(YmdToMjdTest, Test3) {
     EXPECT_EQ(ymd_to_mjd(1981, 2, 12), 44647);
 }
 
-TEST(YmdToMjdTest, Test4)
-{
+TEST(YmdToMjdTest, Test4) {
     EXPECT_EQ(ymd_to_mjd(2020, 10, 3), 59125);
 }
 
-TEST(YmdToMjdTest, CatchesBadDateInputs)
-{
+TEST(YmdToMjdTest, CatchesBadDateInputs) {
     EXPECT_THROW({
         ymd_to_mjd(2021, 14, 1);  // bad month
     }, std::domain_error);
@@ -51,8 +46,7 @@ TEST(YmdToMjdTest, CatchesBadDateInputs)
 }
 
 // =================================================================================================
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
     ::testing::GTEST_FLAG(death_test_style) = "threadsafe";
 
     ::testing::InitGoogleTest(&argc, argv);
