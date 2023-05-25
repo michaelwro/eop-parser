@@ -31,9 +31,9 @@ datestr_to_ymd_t datestr_to_ymd(const std::string& datestr) {
         throw std::invalid_argument(invalid_str_error_msg(datestr));
     }
 
-    const unsigned int year = tm_components.tm_year + 1900;
-    const unsigned int month = tm_components.tm_mon + 1;
-    const unsigned int day = tm_components.tm_mday;
+    const auto year = static_cast<unsigned int>(tm_components.tm_year + 1900);
+    const auto month = static_cast<unsigned int>(tm_components.tm_mon + 1);
+    const auto day = static_cast<unsigned int>(tm_components.tm_mday);
 
     return std::make_tuple(year, month, day);
 }
