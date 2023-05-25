@@ -15,11 +15,6 @@ namespace sdp {
 namespace utils {
 
 /**
- * @brief {year, month, day} return type for datestr_to_ymd.
- */
-using datestr_to_ymd_t = std::tuple<unsigned int, unsigned int, unsigned int>;
-
-/**
  * @brief Convert "YY-mm-dd" date string to year, month, and day number.
  *
  * @param datestr Date string in "YY-mm-dd" format.
@@ -28,7 +23,7 @@ using datestr_to_ymd_t = std::tuple<unsigned int, unsigned int, unsigned int>;
  * @exception std::invalid_argument Invalid date string.
  * @ref https://stackoverflow.com/a/35290214
  */
-datestr_to_ymd_t datestr_to_ymd(const std::string& datestr);
+std::tuple<unsigned int, unsigned int, unsigned int> datestr_to_ymd(const std::string& datestr);
 
 }  // namespace utils
 }  // namespace sdp

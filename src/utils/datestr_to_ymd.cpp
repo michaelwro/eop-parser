@@ -5,12 +5,12 @@
  * @copyright Copyright (c) 2023 Michael Wrona
  */
 
+#include <utils/datestr_to_ymd.h>
+
 #include <ctime>
 #include <iomanip>
 #include <sstream>
 #include <stdexcept>
-
-#include <utils/datestr_to_ymd.h>
 
 namespace sdp {
 namespace utils {
@@ -20,7 +20,7 @@ static inline std::string invalid_str_error_msg(const std::string& input) {
     return std::string("Could not convert " + input + " to YY-mm-dd format.");
 }
 
-datestr_to_ymd_t datestr_to_ymd(const std::string& datestr) {
+std::tuple<unsigned int, unsigned int, unsigned int> datestr_to_ymd(const std::string& datestr) {
     static const std::string DATE_FORMAT {"%Y-%m-%d"};  // date string format
 
     std::istringstream ss {datestr};

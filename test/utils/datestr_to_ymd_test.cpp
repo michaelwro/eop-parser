@@ -13,7 +13,6 @@
 #include <string>
 
 using sdp::utils::datestr_to_ymd;
-using sdp::utils::datestr_to_ymd_t;
 
 namespace {
 
