@@ -20,7 +20,7 @@ link_directories(
 set(SDP_TEST_DIR ${CMAKE_SOURCE_DIR}/test/)
 
 # Make tests in this folder
-set(TEST_SDP_EXEC eop_parser_test)
+set(TEST_SDP_EXEC sdp_test)
 file(GLOB SDP_TEST_SRC
     ./*.cpp
     ./utils/*.cpp

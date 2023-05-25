@@ -14,8 +14,6 @@ using sdp::utils::ymd_to_mjd;
 
 namespace {
 
-const std::string test_reports_file = std::string("ymd_to_mjd.xml");
-
 /**
  * NOTE: Generated test cases from this utility: http://www.csgnetwork.com/julianmodifdateconv.html
  */
@@ -55,7 +53,6 @@ TEST(YmdToMjdTest, CatchesBadDateInputs)
 // =================================================================================================
 int main(int argc, char** argv)
 {
-    ::testing::GTEST_FLAG(output) = std::string("xml:") + test_reports_file;
     ::testing::GTEST_FLAG(death_test_style) = "threadsafe";
 
     ::testing::InitGoogleTest(&argc, argv);
