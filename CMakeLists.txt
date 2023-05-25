@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
-project(EopParser LANGUAGES CXX
-    DESCRIPTION "EOP parser"
+project(SpaceDataParser LANGUAGES CXX
+    DESCRIPTION "Space data parser"
 )
 
 # ADD MODULES AND THIRD PARTY ======================================================================
@@ -30,15 +30,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # define compiler and preprocessor options
-set(EOPPARSER_COMPILE_DEFINITIONS_DEBUG "")
-set(EOPPARSER_COMPILE_DEFINITIONS_RELEASE "NDEBUG")
+set(SDP_COMPILE_DEFINITIONS_DEBUG "")
+set(SDP_COMPILE_DEFINITIONS_RELEASE "NDEBUG")
 
-set(EOPPARSER_COMPILE_OPTIONS "-Wall;-Wextra;-Wpedantic;-Wshadow;-Wconversion;-Wdouble-promotion;-Wfloat-equal;-Wundef;-Wformat=2")
-set(EOPPARSER_COMPILE_OPTIONS_DEBUG "${EOPPARSER_COMPILE_OPTIONS};-Werror;-g3;-O0;-Wcast-align;-Wcast-qual")
-set(EOPPARSER_COMPILE_OPTIONS_RELEASE "${EOPPARSER_COMPILE_OPTIONS};-O1")
+set(SDP_COMPILE_OPTIONS "-Wall;-Wextra;-Wpedantic;-Wshadow;-Wconversion;-Wdouble-promotion;-Wfloat-equal;-Wundef;-Wformat=2")
+set(SDP_COMPILE_OPTIONS_DEBUG "${SDP_COMPILE_OPTIONS};-Werror;-g3;-O0;-Wcast-align;-Wcast-qual")
+set(SDP_COMPILE_OPTIONS_RELEASE "${SDP_COMPILE_OPTIONS};-O1")
 
 # library name
-set(EOPPARSER_LIB "eopparser")
+set(SDP_LIB "sdp")
 
 # outputs
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
@@ -55,34 +55,34 @@ set(INCL_DIR ./include/)
 # BUILD LIBRARY ====================================================================================
 # decide which lib type to build
 if(BUILD_SHARED_LIBS)
-    add_library(${EOPPARSER_LIB} SHARED)
+    add_library(${SDP_LIB} SHARED)
 else()
-    add_library(${EOPPARSER_LIB} STATIC)
+    add_library(${SDP_LIB} STATIC)
 endif()
 
 # get lib sources
-file(GLOB EOPPARSER_SOURCES
+file(GLOB SDP_SOURCES
     ${SRC_DIR}/*.cpp
     ${SRC_DIR}/utils/*.cpp
 )
 
-target_sources(${EOPPARSER_LIB} PRIVATE
-    ${EOPPARSER_SOURCES}
+target_sources(${SDP_LIB} PRIVATE
+    ${SDP_SOURCES}
 )
 
 
 # define compile stuff
-target_compile_definitions(${EOPPARSER_LIB} PUBLIC $<$<CONFIG:DEBUG>:${EOPPARSER_COMPILE_DEFINITIONS_DEBUG}>)
-target_compile_definitions(${EOPPARSER_LIB} PUBLIC $<$<CONFIG:RELEASE>:${EOPPARSER_COMPILE_DEFINITIONS_RELEASE}>)
+target_compile_definitions(${SDP_LIB} PUBLIC $<$<CONFIG:DEBUG>:${SDP_COMPILE_DEFINITIONS_DEBUG}>)
+target_compile_definitions(${SDP_LIB} PUBLIC $<$<CONFIG:RELEASE>:${SDP_COMPILE_DEFINITIONS_RELEASE}>)
 
-target_compile_options(${EOPPARSER_LIB} PRIVATE $<$<CONFIG:DEBUG>:${EOPPARSER_COMPILE_OPTIONS_DEBUG}>)
-target_compile_options(${EOPPARSER_LIB} PRIVATE $<$<CONFIG:RELEASE>:${EOPPARSER_COMPILE_OPTIONS_RELEASE}>)
+target_compile_options(${SDP_LIB} PRIVATE $<$<CONFIG:DEBUG>:${SDP_COMPILE_OPTIONS_DEBUG}>)
+target_compile_options(${SDP_LIB} PRIVATE $<$<CONFIG:RELEASE>:${SDP_COMPILE_OPTIONS_RELEASE}>)
 
-target_include_directories(${EOPPARSER_LIB} PRIVATE
+target_include_directories(${SDP_LIB} PRIVATE
     ${INCL_DIR}
 )
 
-target_link_libraries(${EOPPARSER_LIB} PRIVATE
+target_link_libraries(${SDP_LIB} PRIVATE
     AriaCsvParser
 )
 

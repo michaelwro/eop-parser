@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <string>
 
-using EopParser::EopUtils::ymd_to_mjd;
+using sdp::utils::ymd_to_mjd;
 
 namespace {
 

@@ -1,19 +1,19 @@
 /**
- * @file eop_defs.h
+ * @file sdp_defs.h
  * @author Michael Wrona
- * @date 2023-04-23
+ * @date 2023-05-25
  * @copyright Copyright (c) 2023 Michael Wrona
  */
 
-#ifndef EOPPARSER_EOP_DEFS_H_
-#define EOPPARSER_EOP_DEFS_H_
+#ifndef SDP_SDPDEFS_H_
+#define SDP_SDPDEFS_H_
 
-namespace EopParser {
+namespace sdp {
 
 /**
  * @brief EOP set fron CelesTrak data.
  */
-struct celestrak_data_t
+struct celestrak_eop_t
 {
     double MJD;  ///< [days] Modified Julian date.
     double dUT1;  ///< [sec] UT1-UTC.
@@ -26,6 +26,6 @@ struct celestrak_data_t
     double dEps;  ///< [arcsec] Obliquity of the ecliptic correction.
 };
 
-}  // namespace EopParser
+}  // namespace sdp
 
-#endif  // EOPPARSER_EOP_DEFS_H_
+#endif  // SDP_SDPDEFS_H_

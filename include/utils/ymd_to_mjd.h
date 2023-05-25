@@ -8,8 +8,8 @@
 #ifndef EOPPARSER_YMD_TO_MJD_H_
 #define EOPPARSER_YMD_TO_MJD_H_
 
-namespace EopParser {
-namespace EopUtils {
+namespace sdp {
+namespace utils {
 
 /**
  * @brief Convert Gregorian year/month/day date to mean Julian date (MJD).
@@ -25,7 +25,7 @@ namespace EopUtils {
  */
 unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day);
 
-}  // namespace EopUtils
-}  // namespace EopParser
+}
+}
 
 #endif  // EOPPARSER_YMD_TO_MJD_H_

@@ -9,8 +9,8 @@
 
 #include <stdexcept>
 
-namespace EopParser {
-namespace EopUtils {
+namespace sdp {
+namespace utils {
 
 unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day) {
     if (month == 0 || month > 12)
@@ -38,5 +38,5 @@ unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day)
         + day + B - 2401525U;  // -1524.5 - 2400000.5
 }
 
-}  // namespace EopUtils
-}  // namespace EopParser
+}  // namespace utils
+}  // namespace sdp

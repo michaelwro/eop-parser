@@ -33,17 +33,17 @@ DATE,MJD,X,Y,UT1-UTC,LOD,DPSI,DEPS,DX,DY,DAT,DATA_TYPE
 ## Examples (WIP)
 
 ```cpp
-EopParser::CelesTrakParser parser("data.csv");
+sdp::CelesTrakEOP eop_parser("data.csv");
 
 /**
  * parse file for date range, generate spline interpolation polynomials
  */
-parser.read(5900);  // MDJ, input -> table end
-parser.read(0, 5900);  // MJD range
-parser.read("2022-01-01");  // date string, input -> table end
-parser.read("2021-01-01", "2022-01-01");  // date string range
+eop_parser.read(5900);  // MDJ, input -> table end
+eop_parser.read(0, 5900);  // MJD range
+eop_parser.read("2022-01-01");  // date string, input -> table end
+eop_parser.read("2021-01-01", "2022-01-01");  // date string range
 
-EopParser::celestrak_data_t eop = parser.get(5612.6);  // via struct
+EopParser::celestrak_eop_t eop = parser.get(5612.6);  // via struct
 double x = eop.X;
 ```
 
