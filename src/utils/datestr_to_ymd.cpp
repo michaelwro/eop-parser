@@ -15,27 +15,24 @@
 namespace sdp {
 namespace utils {
 
-
-static inline std::string invalid_str_error_msg(const std::string& input) {
-    return std::string("Could not convert " + input + " to YY-mm-dd format.");
-}
-
 std::tuple<unsigned int, unsigned int, unsigned int> datestr_to_ymd(const std::string& datestr) {
-    static const std::string DATE_FORMAT {"%Y-%m-%d"};  // date string format
+    static const std::string date_format {"%Y-%m-%d"};  // date string format
 
     std::istringstream ss {datestr};
     std::tm tm_components {};
-    ss >> std::get_time(&tm_components, DATE_FORMAT.c_str());
+    ss >> std::get_time(&tm_components, date_format.c_str());
 
     if (!ss) {
-        throw std::invalid_argument(invalid_str_error_msg(datestr));
+        throw std::invalid_argument(
+            "Could not convert " + datestr + " to " + date_format
+        );
     }
 
-    const auto year = static_cast<unsigned int>(tm_components.tm_year + 1900);
-    const auto month = static_cast<unsigned int>(tm_components.tm_mon + 1);
-    const auto day = static_cast<unsigned int>(tm_components.tm_mday);
-
-    return std::make_tuple(year, month, day);
+    return std::make_tuple(
+        static_cast<unsigned int>(tm_components.tm_year + 1900),  // yr
+        static_cast<unsigned int>(tm_components.tm_mon + 1),  // mo
+        static_cast<unsigned int>(tm_components.tm_mday)  // dy
+    );
 }
 
 }  // namespace utils
