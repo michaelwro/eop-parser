@@ -28,11 +28,21 @@ unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day)
     }
 
     const auto A = static_cast<unsigned int>(year / 100);
-    const unsigned int B = 2 - A + static_cast<unsigned int>(A / 4);
+    const unsigned int B = 2 - A + static_cast<unsigned int>(0.25 * A);
 
     return static_cast<unsigned int>(365.25 * (year + 4716))
         + static_cast<unsigned int>(30.6001 * (month + 1))
         + day + B - 2401525U;  // -1524.5 - 2400000.5
+}
+
+unsigned int ymd_to_mjd(std::tuple<unsigned int, unsigned int, unsigned int> ymd) {
+    unsigned int yr {};
+    unsigned int mo {};
+    unsigned int dy {};
+
+    std::tie(yr, mo, dy) = ymd;
+
+    return ymd_to_mjd(yr, mo, dy);
 }
 
 }  // namespace utils

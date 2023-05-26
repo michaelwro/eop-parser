@@ -8,6 +8,8 @@
 #ifndef EOPPARSER_YMD_TO_MJD_H_
 #define EOPPARSER_YMD_TO_MJD_H_
 
+#include <tuple>
+
 namespace sdp {
 namespace utils {
 
@@ -24,6 +26,16 @@ namespace utils {
  * @exception std::domain_error Invalid date input.
  */
 unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day);
+
+/**
+ * @brief Convert Gregorian year/month/day date to mean Julian date (MJD).
+ *
+ * @details Algorithm from "Astronomical Algorithms" 2nd ed. (Meeus).
+ *
+ * @param ymd Tuple of {year, month, day}.
+ * @return Mean Julian date.
+ */
+unsigned int ymd_to_mjd(std::tuple<unsigned int, unsigned int, unsigned int> ymd);
 
 }
 }
