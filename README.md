@@ -32,19 +32,24 @@ DATE,MJD,X,Y,UT1-UTC,LOD,DPSI,DEPS,DX,DY,DAT,DATA_TYPE
 
 ## Examples (WIP)
 
+Below are my ideas for the interface.
+
 ```cpp
 sdp::CelesTrakEOP eop_parser("data.csv");
 
-/**
- * parse file for date range, generate spline interpolation polynomials
- */
-eop_parser.read(5900);  // MDJ, input -> table end
-eop_parser.read(0, 5900);  // MJD range
-eop_parser.read("2022-01-01");  // date string, input -> table end
-eop_parser.read("2021-01-01", "2022-01-01");  // date string range
+eop_parser.load();  // all
+eop_parser.load_range(5000, 5500);  // input mjd -> input mjd
+eop_parser.load_range("2020-01-01", "2021-01-01");  // input date -> input date
 
-EopParser::celestrak_eop_t eop = parser.get(5612.6);  // via struct
-double x = eop.X;
+eop_parser.load_from_begin(5500);  // table begin -> input end mjd
+eop_parser.load_from_begin("2021-01-01");  // table begin -> input end date
+
+eop_parser.load_to_end(5000);  // input begin mjd -> end
+eop_parser.load_to_end("2020-01-01");  // input begin date -> end
+
+sdp::celestrak_eop_t eop = parser.get_all(5612.6);  // all via struct?
+double x = parser.get_dpsi(5612.6);  // one via method?
+double x = parser.get(5612.6, sdp::eop::dPsi);  // one via enum?
 ```
 
 ## Resources
