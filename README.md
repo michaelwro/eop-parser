@@ -1,6 +1,6 @@
 # Space Data Parser
 
-[![Build & Test](https://github.com/michaelwro/eop-parser/actions/workflows/build-test-main.yml/badge.svg)](https://github.com/michaelwro/eop-parser/actions/workflows/build-test-main.yml) [![Pre-Commit](https://github.com/michaelwro/eop-parser/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/michaelwro/eop-parser/actions/workflows/pre-commit.yml)
+[![Build & Test](https://github.com/michaelwro/space-data-parser/actions/workflows/build-test-main.yml/badge.svg)](https://github.com/michaelwro/space-data-parser/actions/workflows/build-test-main.yml) [![Pre-Commit](https://github.com/michaelwro/space-data-parser/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/michaelwro/space-data-parser/actions/workflows/pre-commit.yml)
 
 **Code By:** Michael Wrona | GitHub: [@michaelwro](https://github.com/michaelwro)
 
