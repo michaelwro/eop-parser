@@ -2,7 +2,6 @@
  * @file ymd_to_mjd.h
  * @author Michael Wrona
  * @date 2023-04-23
- * @copyright Copyright (c) 2023 Michael Wrona
  */
 
 #ifndef EOPPARSER_YMD_TO_MJD_H_

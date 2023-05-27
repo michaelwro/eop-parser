@@ -2,7 +2,6 @@
  * @file ymd_to_mjd.cpp
  * @author Michael Wrona
  * @date 2023-04-23
- * @copyright Copyright (c) 2023 Michael Wrona
  */
 
 #include "utils/ymd_to_mjd.h"

@@ -38,7 +38,7 @@
                     "@copyright Copyright (c) {year} Michael Wrona"
                 ],
                 "doxdocgen.file.fileOrder": [
-                    "file", "author", "date", "copyright"
+                    "file", "author", "date"
                 ],
                 "doxdocgen.generic.useGitUserName": false,
                 "doxdocgen.generic.authorTag": "@author {author}",

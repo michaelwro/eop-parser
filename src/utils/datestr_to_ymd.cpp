@@ -2,7 +2,6 @@
  * @file datestr_to_ymd.cpp
  * @author Michael Wrona
  * @date 2023-05-25
- * @copyright Copyright (c) 2023 Michael Wrona
  */
 
 #include <utils/datestr_to_ymd.h>

@@ -2,7 +2,6 @@
  * @file sdp_defs.h
  * @author Michael Wrona
  * @date 2023-05-25
- * @copyright Copyright (c) 2023 Michael Wrona
  */
 
 #ifndef SDP_SDPDEFS_H_
