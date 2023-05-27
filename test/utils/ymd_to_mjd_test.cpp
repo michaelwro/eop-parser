@@ -38,11 +38,11 @@ TEST(YmdToMjdTest, Test4) {
 TEST(YmdToMjdTest, CatchesBadDateInputs) {
     EXPECT_THROW({
         ymd_to_mjd(2021, 14, 1);  // bad month
-    }, std::domain_error);
+    }, std::invalid_argument);
 
     EXPECT_THROW({
         ymd_to_mjd(2021, 7, 33);  // bad day
-    }, std::domain_error);
+    }, std::invalid_argument);
 }
 
 // =================================================================================================

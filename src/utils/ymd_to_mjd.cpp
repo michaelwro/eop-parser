@@ -14,11 +14,11 @@ namespace utils {
 
 unsigned int ymd_to_mjd(unsigned int year, unsigned int month, unsigned int day) {
     if (month == 0 || month > 12) {
-        throw std::domain_error("Invalid month number");
+        throw std::invalid_argument("Invalid month number");
     }
 
     if (day == 0 || day > 31) {
-        throw std::domain_error("Invalid day number");
+        throw std::invalid_argument("Invalid day number");
     }
 
     // correct date components depending on month number
