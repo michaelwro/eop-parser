@@ -1,14 +1,16 @@
-# EOP Parser
+# Space Data Parser
 
 [![Build & Test](https://github.com/michaelwro/eop-parser/actions/workflows/build-test-main.yml/badge.svg)](https://github.com/michaelwro/eop-parser/actions/workflows/build-test-main.yml) [![Pre-Commit](https://github.com/michaelwro/eop-parser/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/michaelwro/eop-parser/actions/workflows/pre-commit.yml)
 
 **Code By:** Michael Wrona | GitHub: [@michaelwro](https://github.com/michaelwro)
 
-C++ library for parsing and interpolating [CelesTrak](https://celestrak.org/SpaceData/) earth orientation parameter (EOP) releases.
+C++11 library for parsing and processing space data files.
+
+* Parse and interpolate [CelesTrak](https://celestrak.org/SpaceData/) earth orientation parameter (EOP) releases.
 
 ## Build Instructions
 
-This project gets compiled into a shared library `build/lib/libeopparser.so`.
+This project gets compiled into a shared library `build/lib/libsdp.so`.
 
 ### VS Code Build Tasks
 
@@ -58,10 +60,10 @@ double x = parser.get(5612.6, sdp::eop::dPsi);  // one via enum?
 
 ## Repository
 
-This project can be found [here](https://github.com/michaelwro/eop-parser).
+This project can be found [here](https://github.com/michaelwro/space-data-parser).
 
 ```shell
-git clone https://github.com/michaelwro/eop-parser.git
+git clone https://github.com/michaelwro/space-data-parser.git
 ```
 
 ## Non Affiliation
