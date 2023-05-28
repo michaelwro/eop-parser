@@ -15,6 +15,10 @@ on:
       cxx:
         required: true
         type: string
+      static_analysis:
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build-and-test:
@@ -42,8 +46,9 @@ jobs:
         run: ctest --test-dir ./build/ --output-on-failure -T Test
 
       - name: CppCheck
+        if: ${{ inputs.static_analysis }}
         run: bash scripts/run-cppcheck.sh
 
       - name: clang-tidy
-        if: ${{ inputs.build_type == 'Release' }}
+        if: ${{ inputs.static_analysis }}
         run: bash scripts/run-clang-tidy.sh

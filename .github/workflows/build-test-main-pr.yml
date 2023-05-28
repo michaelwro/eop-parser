@@ -1,13 +1,13 @@
-name: Development CI
+name: Development PR CI
 
 on:
-  push:
+  pull_request:
     branches: ["main"]
 
   workflow_dispatch:
 
 jobs:
-  build-test-main:
+  build-test-main-pr:
     strategy:
       matrix:
         os: ["ubuntu-22.04"]
@@ -21,4 +21,4 @@ jobs:
       build_type: ${{ matrix.build_type }}
       cc: ${{ matrix.cc }}
       cxx: ${{ matrix.cxx }}
-      static_analysis: false
+      static_analysis: true
