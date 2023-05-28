@@ -12,7 +12,7 @@ find $PROJ_DIR/src/ $PROJ_DIR/include/ -type f \( -iname *.cpp -o -iname *.h \) 
     cppcheck --file-list=- \
         --enable=style,warning \
         --language=c++ \
-        --std=c++11 \
+        --std=c++20 \
         --platform=unix64 \
         -I $PROJ_DIR/include/ \
         -i $PROJ_DIR/build/

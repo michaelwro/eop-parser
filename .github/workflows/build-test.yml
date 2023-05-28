@@ -1,60 +1,49 @@
-name: Build, Test, Analyze
+name: Build & Test
 
 on:
   workflow_call:
     inputs:
-      ubuntu_version:
+      os:
         required: true
         type: string
       build_type:
+        required: true
+        type: string
+      cc:
+        required: true
+        type: string
+      cxx:
         required: true
         type: string
 
 jobs:
   build-and-test:
     name: ${{ inputs.build_type }} Build & Test
-    runs-on: ubuntu-latest
-    if: "${{ !contains(github.event.head_commit.message, 'ci skip') }}"
+    runs-on: ${{ inputs.os }}
+    if: ${{ !contains(github.event.head_commit.message, 'ci skip') }}
+
+    env:
+      CC: ${{ inputs.cc }}
+      CXX: ${{ inputs.cxx }}
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: recursive
+
+      - name: Install deps
+        run: sudo apt install -y cppcheck gdb
 
       - name: Build
-        uses: devcontainers/ci@v0.3
-        env:
-          UBUNTU_VERSION: ${{ inputs.ubuntu_version }}
-        with:
-          cacheFrom: ghcr.io/${{ github.repository }}-devcontainer:${{ inputs.ubuntu_version }}
-          runCmd: |
-            cmake -B build/ -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
-            cmake --build build/ -j
+        run: |
+          cmake -B build/ \
+            -DCMAKE_BUILD_TYPE=${{ inputs.build_type }}
+          cmake --build build/ -j
 
-      - name: Run tests
-        uses: devcontainers/ci@v0.3
-        env:
-          UBUNTU_VERSION: ${{ inputs.ubuntu_version }}
-        with:
-          cacheFrom: ghcr.io/${{ github.repository }}-devcontainer:${{ inputs.ubuntu_version }}
-          runCmd: |
-            ctest --test-dir ./build/ --output-on-failure -T Test
+      - name: Test
+        run: ctest --test-dir ./build/ --output-on-failure -T Test
 
-      - name: Run CppCheck
-        uses: devcontainers/ci@v0.3
-        env:
-          UBUNTU_VERSION: ${{ inputs.ubuntu_version }}
-        with:
-          cacheFrom: ghcr.io/${{ github.repository }}-devcontainer:${{ inputs.ubuntu_version }}
-          runCmd: |
-            bash scripts/run-cppcheck.sh
+      - name: CppCheck
+        run: bash scripts/run-cppcheck.sh
 
-      - name: Run clang-tidy
-        uses: devcontainers/ci@v0.3
-        if: ${{ github.event_name == 'pull_request' }}
-        env:
-          UBUNTU_VERSION: ${{ inputs.ubuntu_version }}
-        with:
-          cacheFrom: ghcr.io/${{ github.repository }}-devcontainer:${{ inputs.ubuntu_version }}
-          runCmd: |
-            bash scripts/run-clang-tidy.sh
+      - name: clang-tidy
+        if: ${{ inputs.build_type == 'Release' }}
+        run: bash scripts/run-clang-tidy.sh

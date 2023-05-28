@@ -26,13 +26,14 @@ void CelesTrakEop::load() {
     if (filename.empty()) {
         throw std::invalid_argument("No file name specified.");
     }
-
+    // #region File stuff
     // open file
     std::ifstream file(filename, std::ifstream::in);
 
     if (!file.good()) {
         throw std::runtime_error("Error opening file.");
     }
+    // #endregion
 
 }
 
