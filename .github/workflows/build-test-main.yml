@@ -17,8 +17,10 @@ jobs:
         cc: ["gcc-10"]
         cxx: ["g++-10"]
         include:
-          - cc: "clang-14"
-          - cxx: "clang++-14"
+          - os: "ubuntu-22.04"
+            build_type: "Debug"
+            cc: "clang-14"
+            cxx: "clang++-14"
 
     uses: ./.github/workflows/build-test.yml
     with:
