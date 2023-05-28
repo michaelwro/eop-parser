@@ -28,9 +28,9 @@ TEST(CelesTrakEopTest, InvalidFilename) {
 TEST(CelesTrakEopTest, sdfsdfds) {
 
     const std::string test_file_directory = std::string(TEST_FILE_DIR);
-    const std::string simple_csv_file {test_file_directory + "/" + "simple.csv"};
+    const std::string celestrak_csv {test_file_directory + "/" + "celestrak_error.csv"};
 
-    sdp::CelesTrakEop parser(simple_csv_file);
+    sdp::CelesTrakEop parser(celestrak_csv);
 
     parser.load();
 
