@@ -28,4 +28,3 @@ jobs:
       build_type: ${{ matrix.build_type }}
       cc: ${{ matrix.cc }}
       cxx: ${{ matrix.cxx }}
-      coverage: true
