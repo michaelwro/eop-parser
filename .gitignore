@@ -43,3 +43,5 @@ Testing/
 
 *.csv
 !test/data/*.csv
+
+*.png

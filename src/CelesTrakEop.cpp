@@ -5,6 +5,9 @@
  */
 
 #include <CelesTrakEop.h>
+
+#include <utils/TableInterpolator.h>
+#include <utils/print.h>
 #include <sdp_defs.h>
 
 #include <parser.hpp>
@@ -14,8 +17,8 @@
 #include <cstddef>
 #include <iostream>
 #include <tuple>
-
 #include <cstdlib>
+#include <iomanip>
 
 namespace sdp {
 
@@ -38,7 +41,7 @@ enum EopColumn : std::size_t {
 
 
 // using eop_row_t = std::tuple<double, double, double, double, double, double, double, double, double, double>;
-using eop_row_t = std::tuple<double>;
+using eop_row_t = std::tuple<double, double>;
 static eop_row_t parse_row(const aria::csv::CsvParser::iterator& csv_row);
 
 
@@ -64,6 +67,9 @@ void CelesTrakEop::load() {
 
     std::size_t row_num = 1;
 
+    std::vector<double> mjd {};
+    std::vector<double> x {};
+
     for (auto row_itr = ++parser.begin(); row_itr != parser.end(); ++row_itr) {
         row_num++;
 
@@ -73,15 +79,22 @@ void CelesTrakEop::load() {
             throw std::runtime_error("Invalid number of rows in CSV file, row " + std::to_string(row_num));
         }
 
-        double mjd {};
+        double mjd_parsed {};
+        double x_parsed {};
+        std::tie(mjd_parsed, x_parsed) = parse_row(row_itr);
 
-        std::tie(mjd) = parse_row(row_itr);
-
-        // const std::string date = row_itr->at(EopColumn::DATE);
-
-
-
+        mjd.emplace_back(mjd_parsed);
+        x.emplace_back(x_parsed);
     }
+
+    // std::cout << "X:\n";
+    // utils::print(x);
+
+    utils::TableInterpolator<double> interp;
+    interp.generate(mjd, x);
+
+    double res = interp.evaluate(58119.5);
+    std::cout << std::fixed << "\n\nRESULT: " << res << "\n";
 
 }
 
@@ -106,8 +119,9 @@ eop_row_t parse_row(const aria::csv::CsvParser::iterator& csv_row) {
 
     // MJD
     double mjd = validate_double_field(csv_row->at(EopColumn::MJD));
+    double x = validate_double_field(csv_row->at(EopColumn::X));
 
-    return eop_row_t(mjd);
+    return eop_row_t(mjd, x);
 }
 
 }
