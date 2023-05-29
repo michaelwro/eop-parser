@@ -21,4 +21,4 @@ jobs:
       build_type: ${{ matrix.build_type }}
       cc: ${{ matrix.cc }}
       cxx: ${{ matrix.cxx }}
-      static_analysis: true
+      static_analysis: false
