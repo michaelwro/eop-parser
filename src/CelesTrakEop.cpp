@@ -13,6 +13,7 @@
 #include <stdexcept>
 #include <cstddef>
 #include <iostream>
+#include <tuple>
 
 #include <cstdlib>
 
@@ -32,10 +33,13 @@ enum EopColumn : std::size_t {
     DEPS,
     DX,
     DY,
-    DAT,
-    DATA_TYPE
+    DAT
 };
 
+
+// using eop_row_t = std::tuple<double, double, double, double, double, double, double, double, double, double>;
+using eop_row_t = std::tuple<double>;
+static eop_row_t parse_row(const aria::csv::CsvParser::iterator& csv_row);
 
 
 
@@ -69,37 +73,41 @@ void CelesTrakEop::load() {
             throw std::runtime_error("Invalid number of rows in CSV file, row " + std::to_string(row_num));
         }
 
-        const std::string date = row_itr->at(EopColumn::DATE);
+        double mjd {};
 
-        double mjd = 2;
-        try {
-            // mjd = std::stod(row_itr->at(EopColumn::MJD));
+        std::tie(mjd) = parse_row(row_itr);
 
-            auto valid_double = [](const std::string& str) {
-                char* end {};
-                (void)std::strtod(str.c_str(), &end);
-
-                if (end == str.c_str() || *end != '\0')
-                    return false;
-
-                return true;
-            };
-            // char* end {};
-            // mjd = std::strtod(row_itr->at(EopColumn::MJD).c_str(), &end);
-            if (!valid_double(row_itr->at(EopColumn::MJD)))
-                throw std::runtime_error("fddfgdfg");
-        }
-        catch (const std::exception& e) {
-            std::cerr << "Error parsing data in row " << row_num << ".\n";
-        }
-
-        std::cout << "MJD: " << mjd << "\n";
-        mjd += 123;
+        // const std::string date = row_itr->at(EopColumn::DATE);
 
 
 
     }
 
+}
+
+
+
+
+
+
+
+eop_row_t parse_row(const aria::csv::CsvParser::iterator& csv_row) {
+
+    auto validate_double_field = [](const std::string& val_str) {
+        char* end {};
+        const double val = std::strtod(val_str.c_str(), &end);
+
+        if ((end == val_str.c_str()) || (*end != '\0')) {
+            throw std::invalid_argument("Cound not convert CSV element to double.");
+        }
+
+        return val;
+    };
+
+    // MJD
+    double mjd = validate_double_field(csv_row->at(EopColumn::MJD));
+
+    return eop_row_t(mjd);
 }
 
 }
