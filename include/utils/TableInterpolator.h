@@ -96,8 +96,6 @@ public:
         for (std::size_t ix = 1; ix < n; ix++) {
             alpha.at(ix) = 3.0 / m_splines.at(ix).get_h() * (a.at(ix+1) - a.at(ix))
                 - 3.0 / m_splines.at(ix-1).get_h() * (a.at(ix) - a.at(ix-1));
-            // alpha.at(ix) = (3.0 * (a.at(ix+1) - a.at(ix)) / m_splines.at(ix).get_h())
-            //     - (3.0 * (a.at(ix) - a.at(ix-1)) / m_splines.at(ix-1).get_h());
 
             // std::cout << "IX: " << ix << "H: " << m_splines.at(ix).get_h() << "\n";
         }
@@ -124,13 +122,12 @@ public:
         std::vector<T> b(n, 0);
         std::vector<T> d(n, 0);
 
-        // TODO: FIX EQUATION INDICES AS TO NOT REQUIRE THIS
-        int n_signed = static_cast<int>(n);
-        for (int ix = n_signed-1; ix > -1; ix--) {
-            c.at(ix) = z.at(ix) - u.at(ix) * c.at(ix+1);
-            b.at(ix) = (a.at(ix+1) - a.at(ix)) / m_splines.at(ix).get_h()
-                - (m_splines.at(ix).get_h() * (c.at(ix+1) + 2.0 * c.at(ix))) / 3.0;
-            d.at(ix) = (c.at(ix+1) - c.at(ix)) / (3.0 * m_splines.at(ix).get_h());
+        // NOTE: had to shift the indices w.r.t. the original to use unsinged std::size_t
+        for (std::size_t ix = n; ix != 0; ix--) {
+            c.at(ix-1) = z.at(ix-1) - u.at(ix-1) * c.at(ix);
+            b.at(ix-1) = (a.at(ix) - a.at(ix-1)) / m_splines.at(ix-1).get_h()
+                - (m_splines.at(ix-1).get_h() * (c.at(ix) + 2.0 * c.at(ix-1))) / 3.0;
+            d.at(ix-1) = (c.at(ix) - c.at(ix-1)) / (3.0 * m_splines.at(ix-1).get_h());
         }
 
         assert(m_splines.size() == n);
@@ -153,7 +150,7 @@ public:
 
         assert(spline_itr != m_splines.end());
 
-        std::cout << (*spline_itr);
+        // std::cout << (*spline_itr);
 
         return spline_itr->evaluate(x_val);
     }

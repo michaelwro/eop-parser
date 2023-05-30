@@ -59,6 +59,7 @@ void CelesTrakEop::load() {
     std::ifstream file(m_filename, std::ifstream::in);
 
     if (!file.good()) {
+        file.close();
         throw std::runtime_error("Error opening file.");
     }
 
@@ -75,6 +76,7 @@ void CelesTrakEop::load() {
 
         if (row_itr->size() != CELESTRAK_CSV_COLS) {
             // std::cerr << "Invalid number of rows in CSV file, row " << row_num << "\n";
+            file.close();
             throw std::runtime_error("Invalid number of rows in CSV file, row " + std::to_string(row_num));
         }
 
@@ -120,7 +122,7 @@ eop_row_t parse_row(const aria::csv::CsvParser::iterator& csv_row) {
         const double val = std::strtod(val_str.c_str(), &end);
 
         if ((end == val_str.c_str()) || (*end != '\0')) {
-            throw std::invalid_argument("Cound not convert CSV element to double.");
+            throw std::runtime_error("Cound not convert CSV element to double.");
         }
 
         return val;
