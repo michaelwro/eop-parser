@@ -6,7 +6,6 @@
 
 #include <CelesTrakEop.h>
 
-#include <utils/TableInterpolator.h>
 #include <utils/print.h>
 #include <sdp_defs.h>
 
@@ -48,16 +47,16 @@ static eop_row_t parse_row(const aria::csv::CsvParser::iterator& csv_row);
 
 
 CelesTrakEop::CelesTrakEop(const std::string& csv_file)
-    :filename(csv_file)
+    :m_filename(csv_file)
 {}
 
 void CelesTrakEop::load() {
-    if (filename.empty()) {
+    if (m_filename.empty()) {
         throw std::invalid_argument("No file name specified.");
     }
 
     // open file
-    std::ifstream file(filename, std::ifstream::in);
+    std::ifstream file(m_filename, std::ifstream::in);
 
     if (!file.good()) {
         throw std::runtime_error("Error opening file.");
@@ -90,14 +89,24 @@ void CelesTrakEop::load() {
     // std::cout << "X:\n";
     // utils::print(x);
 
-    utils::TableInterpolator<double> interp;
-    interp.generate(mjd, x);
+    m_loaded = true;
+    m_x_interpolator.generate(mjd, x);
+    // utils::TableInterpolator<double> interp;
+    // interp.generate(mjd, x);
 
-    double res = interp.evaluate(58119.5);
-    std::cout << std::fixed << "\n\nRESULT: " << res << "\n";
+    // double res = interp.evaluate(58119.5);
+    // std::cout << std::fixed << "\n\nRESULT: " << res << "\n";
 
 }
 
+
+double CelesTrakEop::get_x(const double mjd) const {
+    if (!m_loaded) {
+        throw std::runtime_error("Table not yet loaded.");
+    }
+
+    return m_x_interpolator.evaluate(mjd);
+}
 
 
 
